@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--    核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--    操作dom库-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+
+
+<!--准备好一个容器-->
+<div id="test">
+
+</div>
+<!--    此处一定是babel才行-->
+<script type="text/javascript">
+    // 创建虚拟DOM 这不能加引号 标签名 标签属性 内容
+    // const VDOM = React.createElement('h1',{id:"title"},'hello react')
+    const VDOM = React.createElement('h1',{id:"title"},React.createElement('span',{},'react'))
+    // 渲染虚拟DOM到页面
+    ReactDOM.render(VDOM,document.getElementById('test'))
+</script>
+</body>
+</html>

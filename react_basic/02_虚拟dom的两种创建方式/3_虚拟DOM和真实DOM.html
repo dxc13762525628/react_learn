@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>虚拟DOM和真实DOM</title>
+</head>
+<body>
+<!--    核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--    操作dom库-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--    jsx转为js-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+
+<!--准备好一个容器-->
+<div id="test">
+
+</div>
+<!--    此处一定是babel才行-->
+<script type="text/babel">
+    // 创建虚拟DOM 这不能加引号
+    const VDOM = (
+        <h1 id="title">
+            <span>Hello world</span>
+        </h1>
+    )
+    // 渲染虚拟DOM到页面
+    ReactDOM.render(VDOM,document.getElementById('test'))
+    /*
+    * 1. 虚拟DOM本质是object类型对象
+    * 2. 虚拟DOM跟小，真实的比较大，属性多
+    * 3. 虚拟DOM最终会被转化为真实DOM，呈现在页面上
+    * */
+    console.log('虚拟DOM',VDOM)
+    console.log(typeof VDOM)
+    console.log(VDOM instanceof Object)
+
+    // 真实DOM
+    const TDOM = document.getElementById('test')
+    console.log('真实DOM',TDOM)
+    debugger // 打断点
+</script>
+</body>

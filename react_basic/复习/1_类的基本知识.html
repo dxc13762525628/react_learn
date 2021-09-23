@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    // 创建一个Person类
+    class Person {
+        // 构造方法
+        constructor(name, age) {
+            // 构造器中的this指的类的实例对象
+            this.name = name
+            this.age = age
+        }
+
+        // 一般方法
+        speak() {
+            // 一般放在类的原形对象上,给实例用的方法
+            // 通过Person实例调用speak时，speak中的this就是Person实例
+            console.log(`我叫${this.name},我年龄是${this.age}`)
+        }
+
+    }
+
+    // 学生类
+    class Student extends Person {
+        // 构造器方法
+        constructor(name, age, grade) {
+            // super()必须在前面
+            super(name, age)
+            this.grade = grade
+        }
+
+        speak() {
+            // 重写父类继承的方法
+            console.log(`我叫${this.name},我年龄是${this.age},我读${this.grade}`)
+        }
+
+        study(){
+            console.log("我很努力的学习")
+        }
+    }
+
+    /*
+    * 总结：
+    * 1. 类中的构造器不是必须写的,要对实例进行初始化的操作时，如添加指定属性时才加
+    * 2. 子类继承父类,子类调用构造方法时,子类构造器中必须先写super()方法
+    * 3. 类中定义的方法放在类的原形对象上，攻实例去使用
+    * */
+
+    // 学生相关
+    // const s1 = new Student('小张', 15, '高一')
+    // console.log(s1)
+    // s1.speak()
+    // s1.study()
+
+    // 创建一个实例 人相关
+    // const p1 = new Person('tome',18)
+    // const p2 = new Person('jam',20)
+    // console.log(p1)
+    // console.log(p2)
+    // p1.speak()
+    // p2.speak()
+
+</script>
+</body>
+</html>

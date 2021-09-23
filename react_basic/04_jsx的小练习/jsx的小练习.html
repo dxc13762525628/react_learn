@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--    核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--    操作dom库-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--    jsx转为js-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+
+<!--准备好一个容器-->
+<div id="test">
+
+</div>
+<!--    此处一定是babel才行-->
+<script type="text/babel">
+    /*
+    *  一定注意区分js语句（代码） 表达式
+    *  1. 表达式会产生一个值，可以放在一个任何需要值的地方
+    *   eg: 变量能接到值就是表达式
+    *       a
+    *       a+b
+    *       demo(1)
+    *       arr.map()
+    *       function test (){}
+    *  2. 语句 代码
+    *   eg: 控制代码走向
+    *       if (){}
+    *       for(){}
+    *       switch(){case:xxx}
+    * */
+
+    // 模拟一些数据
+    const data = ['Angular','React','Vue']
+    // 创建虚拟DOM 这不能加引号 标签名 标签属性 内容
+    const VDOM = (
+        <div>
+            <h1>前端js框架</h1>
+            <ul>
+                {
+                    data.map((item,index)=>{
+                        return <li key={index}>{item}</li>
+                })
+                }
+            </ul>
+        </div>
+
+    )
+    // 渲染虚拟DOM到页面
+    ReactDOM.render(VDOM, document.getElementById('test'))
+</script>
+</body>
+</html>

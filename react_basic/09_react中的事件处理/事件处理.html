@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="test"></div>
+
+<!--    核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--    操作dom库-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--    jsx转为js-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<!--用于对组件的标签进行限制-->
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<!--    此处一定是babel才行-->
+<script type="text/babel">
+    // 创建组件
+    // ref 就是唯一标识
+    class Demo extends React.Component {
+        /*
+        * (1) 通过onXxx属性指定事件处理函数(注意大小写)
+        *  React使用自定义(合成)事件，而不是使用原生的DOM事件 --为了更好的兼容性
+        *  React中事件是通过事件委托方式处理的(委托给最外层人数) --为了高效
+        * (2) 通过event.target得到发生事件的DOM元素对象 --不要过度使用ref
+        * */
+
+        // React.createRef()调用后会返回一个容器，改容器可以存储被ref所标识的节点
+        // 该容器是专人专用,后面在使用会顶替前一个人的操作
+        myRef = React.createRef()
+
+        render() {
+            // 箭头函数 直接将节点给input1和input2 直接在实例放回就好了
+            // 回调函数的信形式 回调函数指 自己写 自己没调用 别人调用
+            return (
+                <div>
+
+                    <input ref={this.myRef} type="text" placeholder="点击按钮提示数据"/>&nbsp;
+                    <button onClick={this.showData}>点我提示左侧数据</button>
+                    &nbsp;
+                </div>
+            )
+        }
+        // 展示左侧输入框的数据
+        showData = () => {
+            // 真正的节点
+            alert(this.myRef.current.value)
+        }
+    }
+
+    // 渲染主键
+    ReactDOM.render(<Demo/>, document.getElementById('test'))
+
+
+
+</script>
+</body>
+</html>

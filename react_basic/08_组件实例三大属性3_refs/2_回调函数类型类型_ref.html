@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="test"></div>
+
+<!--    核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--    操作dom库-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--    jsx转为js-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<!--用于对组件的标签进行限制-->
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<!--    此处一定是babel才行-->
+<script type="text/babel">
+    // 创建组件
+    // ref 就是唯一标识
+    class Demo extends React.Component {
+        render() {
+            // 箭头函数 直接将节点给input1和input2 直接在实例放回就好了
+            // 回调函数的信形式 回调函数指 自己写 自己没调用 别人调用
+            return (
+                <div>
+
+                    <input ref={currentNode => this.input1 = currentNode} type="text" placeholder="点击按钮提示数据"/>&nbsp;
+                    <button onClick={this.showData}>点我提示左侧数据</button>
+                    &nbsp;
+                    <input ref={currentNode => this.input2=currentNode } onBlur={this.showData2} type="text" placeholder="失去焦点提示数据"/>
+                </div>
+            )
+        }
+
+        // 展示左侧输入框的数据
+        showData = () => {
+            // 真正的节点
+            const input1 = this.input1
+            alert(input1.value)
+        }
+
+        //展示右侧输入框的数据
+        showData2 = () => {
+            const input2 = this.input2
+            alert(input2.value)
+        }
+
+    }
+
+    // 渲染主键
+    ReactDOM.render(<Demo/>, document.getElementById('test'))
+
+
+</script>
+</body>
+</html>

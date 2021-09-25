@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="test"></div>
+
+<!--    核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--    操作dom库-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--    jsx转为js-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<!--用于对组件的标签进行限制-->
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<!--    此处一定是babel才行-->
+<script type="text/babel">
+    // 创建组件
+    // ref 就是唯一标识
+    class Demo extends React.Component {
+        state = {isHot: true}
+
+        showInfo = () => {
+            const {input1} = this
+            alert(input1.value)
+        }
+
+        changeWeather=()=>{
+            const {isHot} = this.state
+            this.setState({isHot: !isHot})
+        }
+
+        saveInput=(currentNode)=>{
+            this.input1=currentNode
+            console.log('*****************',currentNode)
+        }
+
+        render() {
+            const {isHot} = this.state
+            return (
+                <div>
+                    <h2>今天天气很{isHot ? '炎热' : '凉爽'}</h2>
+                    {/*注释 这是内联回调函数 <input ref={(currentNode) => {this.input1 = currentNode;console.log('****',currentNode)}} type="text" placeholder="点击按钮提示数据"/>&nbsp;*/}
+                    <input ref={this.saveInput} type="text" placeholder="点击按钮提示数据"/>&nbsp;{/*这就是class绑定方式一般用内联的回调 对项目没影响*/}
+                    <button onClick={this.showInfo}>点我提示输入的数据</button>
+                    <button onClick={this.changeWeather}>点我切换天气</button>
+                </div>
+            )
+        }
+
+
+    }
+
+    // 渲染主键
+    ReactDOM.render(<Demo/>, document.getElementById('test'))
+
+
+</script>
+</body>
+</html>

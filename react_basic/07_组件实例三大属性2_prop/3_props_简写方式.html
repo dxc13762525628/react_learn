@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="test"></div>
+<div id="test1"></div>
+<div id="test2"></div>
+
+<!--    核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--    操作dom库-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--    jsx转为js-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<!--用于对组件的标签进行限制-->
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<!--    此处一定是babel才行-->
+<script type="text/babel">
+    // 创建组件
+    class Person extends React.Component {
+        render() {
+            // props是只读的
+            return (
+                <ul>
+                    <li>姓名:{this.props.name}</li>
+                    <li>性别:{this.props.age + 1}</li>
+                    <li>年龄:{this.props.sex}</li>
+                </ul>
+            )
+        }
+        // static 表示是给类加属性
+        // 给标签属性进行类型，必要性限制
+        static proptype = {
+            // 表示是必须传递且是字符串
+            name: PropTypes.string.isRequired,
+            sex: PropTypes.string,
+            age: PropTypes.number,
+            speak: PropTypes.func,  //必须是函数
+        }
+        // 给标签默认值设置属性值
+        static defaultProps = {
+            sex: "不男不女",
+            age: 18
+        }
+
+    }
+
+
+    const p = {name: 'tome', age: 18, sex: "女"}
+    // 渲染主键
+    ReactDOM.render(<Person name="tom" speak={speak}/>, document.getElementById('test'))
+    ReactDOM.render(<Person name="jem" age={19} sex="男"/>, document.getElementById('test1'))
+    // ReactDOM.render(<Person name="he" age="20" sex="女"/>,document.getElementById('test2'))
+    // 原生不行 这个操作就是展开对象 不是克隆对象
+    ReactDOM.render(<Person {...p}/>, document.getElementById('test2'))
+
+    function speak() {
+        console.log("我说话了")
+    }
+
+</script>
+</body>
+</html>

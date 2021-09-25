@@ -21,18 +21,35 @@
 <script type="text/babel">
     // 1.创建类式组件 必须继承React的内置类
     class Weather extends React.Component {
-        // 构造器 初始化数据
+        // 构造器 初始化数据 只有创建对象才调用
         constructor(props) {
             super(props)
             // 初始化状态
-            this.state = {isHot: true}
+            this.state = {isHot: true,wind:"微风"}
+            // bind 一个功能是生成新函数 二是改this的指向
+            // 原形实例的函数 重新生成一个新的函数挂载在实例上
+            this.changeWeather = this.changeWeather.bind(this)
 
         }
-
+        // 状态更新一次调用一次
         render() {
             console.log(this)
             // 读取状态 调用函数名
-            return <h1 onClick={demo}>今天天气很{this.state.isHot ? '炎热' : '凉爽'}</h1>
+            return <h1 onClick={this.changeWeather}>今天天气很{this.state.isHot ? '炎热' : '凉爽'},{this.state.wind}</h1>
+        }
+        // 点几次调用几次
+        changeWeather() {
+            // console.log(this)
+            // 由于changeWeather是作为onClick的回调，所以不是通过实例调用的，是直接调用 所以会出现undefined
+
+            // 获取原来的isHot值
+            const isHot = this.state.isHot
+            // 严重注意 状态不能直接修改(直接赋值) 要借助内置api更改!!!
+            // this.state.isHot = !isHot 错误写法
+
+            // api修改 是更新state的数据
+            this.setState({isHot: !isHot})
+            console.log(this.state.isHot)
         }
 
     }
@@ -40,9 +57,9 @@
     // 2.渲染主键到页面
     ReactDOM.render(<Weather/>, document.getElementById('test'))
 
-    function demo(){
-        this.state.isHot = !this.state.isHot
-    }
+    // function demo(){
+    //     this.state.isHot = !this.state.isHot
+    // }
 
 
 </script>

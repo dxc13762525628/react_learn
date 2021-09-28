@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="test"></div>
+
+<!--    核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--    操作dom库-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--    jsx转为js-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<!--用于对组件的标签进行限制-->
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<!--    此处一定是babel才行-->
+<script type="text/babel">
+
+    /*
+    *  key的作用
+    * 1. 简单说,key是虚拟DOM的标识，对于DOM的更新有着至关重要的作用
+    * 2. 详细说
+    *   2.1 再进行更新时，首先会找旧虚拟DOM与新虚拟DOM是否有相同的KEY
+    *   有
+    *       再看虚拟DOM的节点内容是否一致，一直则不更新到真实DOM
+    *       否则更新到真实DOM
+    *   没有
+    *       则直接更新到真实DOM
+    *
+    * 2. 列表索引作为key可能出现的问题
+    *   如果列表出现删除或者更新或者使列表出现混乱，会使key混乱，造成重新生产真实DOM,造成效率低
+    *
+    * */
+
+
+    // 创建组件
+    class Person extends React.Component{
+        state={person:[
+            {'id':1,"age":18,'name':'小李'},
+            {'id':2,"age":19,'name':'小花'},
+            ]}
+
+        addPerson=()=>{
+            const {person}=this.state
+            const p = {id:person.length+1,'age':16,'name':"小王"}
+            this.setState({person:[p,...person]})
+        }
+
+        render(){
+            return(
+                <div>
+                    <h2>展示人员信息</h2>
+                    <h3>使用index作为所以值</h3>
+                    <button onClick={this.addPerson}>点击添加人员信息</button>
+                    <ul>
+                        {this.state.person.map((person,index)=>{
+                            return <li key={index}>id:{person.id},age:{person.age},name:{person.name}
+                            <input type="text"/>
+                            </li>
+                        })}
+                    </ul>
+                    <hr/>
+                    <hr/>
+                    <h3>使用id作为所以值</h3>
+                    <button onClick={this.addPerson}>点击添加人员信息</button>
+                    <ul>
+                        {this.state.person.map((person,index)=>{
+                            return <li key={person.id}>id:{person.id},age:{person.age},name:{person.name}
+                                <input type="text"/>
+                            </li>
+                        })}
+                    </ul>
+                </div>
+            )
+        }
+    }
+
+
+    // 渲染主键
+    ReactDOM.render(<Person/>,document.getElementById('test'))
+
+</script>
+</body>
+</html>

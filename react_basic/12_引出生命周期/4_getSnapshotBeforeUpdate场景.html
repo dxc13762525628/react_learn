@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .list{
+            height: 150px;
+            width: 200px;
+            background-color: skyblue;
+            overflow: auto;
+        }
+        .news{
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="test"></div>
+
+<!--    核心库-->
+<script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
+<!--    操作dom库-->
+<script type="text/javascript" src="../js/17.0.1/react-dom.development.js"></script>
+<!--    jsx转为js-->
+<script type="text/javascript" src="../js/17.0.1/babel.min.js"></script>
+<!--用于对组件的标签进行限制-->
+<script type="text/javascript" src="../js/17.0.1/prop-types.js"></script>
+
+<!--    此处一定是babel才行-->
+<script type="text/babel">
+
+    // 创建组件
+    class NewsList extends React.Component{
+        state={newsArr:[]}
+        componentDidMount(){
+            setInterval(()=>{
+                // 获取原状态
+                const {newsArr}=this.state
+                // 模拟一条新闻
+                const news = '新闻'+(newsArr.length+1)
+                // 更新状态
+                this.setState({newsArr:[news,...newsArr]})
+            },1000)
+        }
+
+        getSnapshotBeforeUpdate(){
+            return this.refs.list.scrollHeight
+        }
+
+        componentDidUpdate(proProps,preState,height){
+            // 滚动条停住
+            this.refs.list.scrollTop+=this.refs.list.scrollHeight-height
+        }
+
+        render(){
+            return(
+                <div className="list" ref="list">
+                    {/*<div className="news">新闻6</div>
+                    <div className="news">新闻5</div>
+                    <div className="news">新闻4</div>
+                    <div className="news">新闻3</div>
+                    <div className="news">新闻2</div>
+                    <div className="news">新闻1</div>*/}
+                    {
+                        this.state.newsArr.map((n,index)=>{
+                            return <div className="news" key={index}>{n}</div>
+                        })
+                    }
+                </div>
+            )
+        }
+    }
+    // 渲染主键
+    ReactDOM.render(<NewsList/>,document.getElementById('test'))
+
+</script>
+</body>
+</html>

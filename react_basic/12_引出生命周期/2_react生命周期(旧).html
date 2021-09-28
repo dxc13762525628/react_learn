@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="test"></div>
+
+<!--    核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--    操作dom库-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--    jsx转为js-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<!--用于对组件的标签进行限制-->
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<!--    此处一定是babel才行-->
+<script type="text/babel">
+    /*
+    * 1. 初始化阶段:ReactDOM.render()触发
+    *   1.1 constructor()
+    *   1.2 componentWillMount()
+    *   1.3 render()
+    *   1.4 componentDidMount()  *****(常用)
+    *       一般做一些初始化的事,开启定时器,发送网络请求，订阅消息
+    * 2. 更新阶段 setState()或者父组件render()
+    *   2.1 showComponentUpdate()
+    *   2.2 componentWillUpdate()
+    *   2.3 render()
+    *   2.4 componentDidMount()
+    * 3. 卸载
+    *   3.1 componentWillUnmount()
+    *       一般做一些收尾的事，关闭定时器,取消订阅消息
+    * */
+
+    // 创建组件
+    class Count extends React.Component {
+        // 构造器
+        constructor(props) {
+            console.log("Count----constructor")
+            super(props);
+            // 出初始化状态
+            this.state = {count: 0}
+        }
+
+
+        add = () => {
+            const {count} = this.state
+            this.setState({count: count + 1})
+        }
+
+        // 卸载组件按钮回调
+        death=()=>{
+            ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+        }
+
+        // 强制更新
+        force=()=>{
+            // 不改状态也可以更新
+            this.forceUpdate()
+        }
+
+        // 组件将要挂载的钩子
+        componentWillMount(){
+            console.log("Count----componentWillMount")
+        }
+
+        // 组件已经挂载好时的钩子
+        componentDidMount(){
+            console.log("Count----componentDidMount")
+        }
+
+        // 组件将要卸载时的钩子
+        componentWillUnmount(){
+            console.log("Count--componentWillUnmount")
+        }
+
+        // 控制组件更新的阀门
+        shouldComponentUpdate(){
+            // true表示可以更新 false不可以更新
+            console.log("Count--shouldComponentUpdate")
+            return true
+        }
+
+        // 控制组件将要更新的钩子
+        componentWillUpdate(){
+            // true表示可以更新 false不可以更新
+            console.log("Count--componentWillUpdate")
+        }
+
+        // 组件已经更新完成
+        componentDidUpdate(){
+            console.log("Count--componentDidUpdate")
+        }
+
+        // 组件渲染时的钩子
+        render() {
+            console.log("Count----render")
+            const {count} = this.state
+            return (
+                <div>
+                    <h2>当前求和为{count}</h2>
+                    <button onClick={this.add}>点我+1</button>
+                    <button onClick={this.death}>卸载组件</button>
+                    <button onClick={this.force}>不更改任何状态中的数据，强制更新一下</button>
+                </div>
+            )
+        }
+    }
+
+    // 父组件
+    class A extends React.Component{
+        state={carName:'奔驰'}
+        changeCar=()=>{
+            this.setState({carName:"宝马"})
+        }
+
+        render(){
+            return(
+                <div>
+                    <div>我是A组件</div>
+                    <button onClick={this.changeCar}>换车</button>
+                    <B carName={this.state.carName}/>
+                </div>
+            )
+        }
+    }
+
+    // 子组件
+    class B extends React.Component{
+
+        componentWillReceiveProps(){
+            // 第二次才算
+            console.log("B-------------------------")
+        }
+
+        render(){
+            return(
+                <div>我是B组件，车是{this.props.carName}</div>
+            )
+        }
+    }
+
+
+    // 渲染主键
+    // ReactDOM.render(<Count/>, document.getElementById('test'))
+    ReactDOM.render(<Count/>, document.getElementById('test'))
+
+</script>
+</body>
+</html>

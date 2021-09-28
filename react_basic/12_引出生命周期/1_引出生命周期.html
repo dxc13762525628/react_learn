@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="test"></div>
+
+<!--    核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--    操作dom库-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--    jsx转为js-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<!--用于对组件的标签进行限制-->
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<!--    此处一定是babel才行-->
+<script type="text/babel">
+    // 创建组件
+    class Life extends React.Component {
+
+        state = {opacity: 1}
+
+        death = () => {
+            // 清除定时器
+            // clearInterval(this.timer)
+            // 卸载组件
+            ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+        }
+
+        // action = () => {
+        //     // 定时任务 200ms一次
+        //     setInterval(() => {
+        //         let {opacity} = this.state
+        //         opacity -= 0.1
+        //         if (opacity <= 0) opacity = 1
+        //         this.setState({opacity})
+        //     }, 200)
+        // }
+
+        // 渲染的时候调用头一次
+        componentDidMount() {
+            // 该函数会在组件挂载的时候调用，且只调用一次
+            // 定时任务 200ms一次
+            this.timer = setInterval(() => {
+                let {opacity} = this.state
+                opacity -= 0.1
+                if (opacity <= 0) opacity = 1
+                this.setState({opacity})
+            }, 200)
+        }
+
+        // 组件将要卸载的时候调用
+        componentWillUnmount(){
+            // 清除定时器
+            clearInterval(this.timer)
+        }
+
+        render() {
+            // 初始化渲染，状态更新会调用
+            return (
+                <div>
+                    <h2 style={{opacity: this.state.opacity}}>React学不会怎么办?</h2>
+                    <button onClick={this.death}>不活了</button>
+                    {/*<button onClick={this.action}>开始变化</button>*/}
+                </div>
+            )
+        }
+    }
+
+    // 渲染主键
+    ReactDOM.render(<Life/>, document.getElementById('test'))
+
+</script>
+</body>
+</html>

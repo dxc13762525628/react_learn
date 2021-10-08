@@ -1,9 +1,16 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types'
 import {nanoid} from 'nanoid'
 import './index.css'
 
 class Index extends Component {
 
+    // 对接收的props的类型，数据限制
+    static propTypes={
+        addTodo:PropTypes.func.isRequired
+    }
+
+    // 键盘事件的回调
     handleKeyUp = (event) => {
         // 解构赋值
         const {keyCode, target} = event

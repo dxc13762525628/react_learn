@@ -68,3 +68,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## 一  todoList案例相关总结
+1. 拆分组件，实现静态组件，注意className,style的写法
+2. 动态初始化列表，确定数据放在哪个state中,个别组件使用，放在自身，大家都用放父组件中
+3. 父子之间的通信，父传子用props，子传需要一个父组件有函数在处理
+4. defaultChecked和checked的区别
+5. 状态在哪，操作状态的方法就在哪

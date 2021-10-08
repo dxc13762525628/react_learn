@@ -1,12 +1,9 @@
-// react核心库
-import React from "react";
-// reactDOM库
-import ReactDOM from 'react-dom';
-// 引入app
-import App from "./App";
+// 导入react
+import React from 'react'
+// 导入react-dom
+import ReactDom from 'react-dom'
+// 导入app
+import App from './App'
 
 
-ReactDOM.render(<App/>, document.getElementById('root'))
-
-
-
+ReactDom.render(<App/>,document.getElementById('root'))

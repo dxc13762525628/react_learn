@@ -75,3 +75,30 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 3. 父子之间的通信，父传子用props，子传需要一个父组件有函数在处理
 4. defaultChecked和checked的区别
 5. 状态在哪，操作状态的方法就在哪
+
+## 二 github案例知识点
+1. 设计状态时考虑全面。例如带有网络请求的主键，考虑失败的情况
+2. ES6小知识点
+```javascript
+ const {keyWordElement: {value: keyWord}} = this // 连续解构赋值并重命名
+```
+3. 消息订阅与发布\
+    先订阅，在发布\
+    适用于任务组件间的通信\
+    要在组件的componentWillUnmount取消订阅
+    
+4. fetch发送请求(关注分离的思想)
+```javascript
+const demo = async ()=>{
+   try {
+      const response = await fetch(`/api1/search/users2?q=${keyWord}`)
+      const data = await response.json()
+      // 发布消息
+      PubSub.publish('atguigu',{users:data.items,isLoading: false})
+      console.log(data)
+   } catch (error) {
+      console.log("请求出错")
+      PubSub.publish('atguigu',{err:error.message,isLoading: true})
+   }
+}
+```

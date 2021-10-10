@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>react hello</title>
-    <link rel="stylesheet" href="./css/bootstrap.css">
+<!--    方式一:去掉路径的. 解决样式丢失问题
+        方式二:使用%PUBLIC_URL%/css/bootstrap.css路径
+        方式三:使用HashRouter 路由带#号也可以解决
+-->
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="stylesheet" href="%PUBLIC_URL%/css/bootstrap.css">
+    <style>
+        .atguigu{
+            background-color: orange !important;
+            color: hotpink !important;
+        }
+    </style>
 </head>
 <body>
 <div id="root">

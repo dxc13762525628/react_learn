@@ -1,30 +1,21 @@
 {
-  "name": "hello-react",
+  "name": "redux_test",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-    "antd": "^4.16.13",
-    "babel-plugin-import": "^1.13.3",
-    "customize-cra": "^1.0.0",
-    "less": "^4.1.2",
-    "less-loader": "^10.1.0",
-    "prop-type": "^0.0.1",
-    "prop-types": "^15.7.2",
-    "pubsub-js": "^1.9.3",
     "react": "^17.0.2",
-    "react-app-rewired": "^2.1.8",
     "react-dom": "^17.0.2",
-    "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
+    "redux": "^4.1.1",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

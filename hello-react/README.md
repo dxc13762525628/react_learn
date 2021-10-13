@@ -1,74 +1,3 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
 ## 一  todoList案例相关总结
 1. 拆分组件，实现静态组件，注意className,style的写法
 2. 动态初始化列表，确定数据放在哪个state中,个别组件使用，放在自身，大家都用放父组件中
@@ -214,3 +143,79 @@ const {id, title} = qs.parse(search.slice(1))
 4. 获取到的search是urlencoded编码字符串，需要借助querystring解析
 
 ### state参数
+1. 路由链接
+```javascript
+Link to={{
+    pathname: '/home/message/detail',
+    state: {id: messageObj.id, title: messageObj.title}
+}}>demo</Link>
+```
+2. 注册路由
+```javascript
+Route path="/home/message/detail" component={Detail}/>
+```
+3. 接收参数
+```javascript
+const {id,title} = this.props.location.state
+```
+
+## 十二 编程式路由导航
+借助this.props.history对象进行操作 前进 后退
+```javascript
+this.props.history.push() 
+this.props.history.replace()
+this.props.history.goBack()
+this.props.history.goForward()
+this.props.history.go()
+```
+
+## 十三 BrowserRouter与HashRouter的区别
+1. 底层原理不一样\
+    BrowserRouter使用的H5的history API,不兼容IE9以下版本\
+    HashRouter使用URL哈希值
+   
+2. path表现形式不一样\
+   BrowserRouter路径中没有path: localhost:8000/demo\
+   HashRouter路由有#:localhost:8000/#/demo
+   
+3. 刷新后对state的影响不同\
+   BrowserRouter没有任何影响，因为state保存在history中\
+   HashRouter刷新会丢失state数据
+   
+4. HashRouter可以解决一些路径中错误的相关问题
+
+## 十四,antd的按需引入+自定义
+1. 安装依赖
+```javascript
+yarn add react-app-rewired customize-cra babel-plugin-import less less-loader
+```
+2. 修改package.json
+```javascript
+"scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  }
+```
+3. 根目录下创建config-overrides.js
+```javascript
+// 修改规则
+const {override, fixBabelImports, addLessLoader} = require('customize-cra');
+
+module.exports = override(
+    fixBabelImports('import', {
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: true
+    }),
+    addLessLoader({
+        lessOptions: {
+            javascriptEnabled: true,
+            modifyVars: {'@primary-color': 'green'},
+        } // 改主题颜色
+    })
+)
+;
+```
+4. 备注,不用在组件里引入样式

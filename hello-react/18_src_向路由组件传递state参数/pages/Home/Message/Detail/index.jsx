@@ -18,8 +18,12 @@ class Detail extends Component {
         // const {id,title} = this.props.match.params
 
         // 获取search的参数,是?id=1&title=2
-        const {search} = this.props.location
-        const {id, title} = qs.parse(search.slice(1)) // 将id=1&title=1 => {id:1,title:1}
+        // const {search} = this.props.location
+        // const {id, title} = qs.parse(search.slice(1)) // 将id=1&title=1 => {id:1,title:1}
+
+        // 获取state参数 参数在body里面
+        const {id,title} = this.props.location.state
+
         const findResult = data.find((dataObj) => {
             return dataObj.id === id
         })

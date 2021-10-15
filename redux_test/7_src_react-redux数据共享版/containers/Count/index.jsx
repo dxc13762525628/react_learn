@@ -1,37 +1,32 @@
-import React, {Component} from 'react';
-import store from "../../redux/store";
-// 引入actionCreate专门用于创建对象
-import {createDecrementAction,createIncrementAction} from "../../redux/count_action"
+import {createIncrementAction, createDecrementAction, createIncrementAsyncAction} from "../../redux/actions/count"
 
+// 引入connect用于连接ui组件与redux
+import {connect} from 'react-redux'
+import React, {Component} from "react";
+
+
+// 定义ui组件
 class Count extends Component {
-
-
-    // componentDidMount() {
-    //     // 检测redux中状态的变化 变化了就更新
-    //     store.subscribe(() => {
-    //         this.setState({})
-    //     })
-    // }
 
     // 加
     increase = () => {
         const {value} = this.selectNumber
         // 更新状态
-        store.dispatch(createIncrementAction(value*1))
+        this.props.increment(value * 1)
     }
 
     // 减
     decrease = () => {
         const {value} = this.selectNumber
-        store.dispatch(createDecrementAction(value*1))
+        // 更新状态
+        this.props.decrement(value * 1)
     }
 
     // 奇数加
     increaseOfadd = () => {
         const {value} = this.selectNumber
-        const count = store.getState()
-        if (count % 2) {
-            store.dispatch(createIncrementAction(value*1))
+        if (this.props.count % 2 === 1) {
+            this.props.increment(value * 1)
         }
 
     }
@@ -39,17 +34,14 @@ class Count extends Component {
     // 异步加
     increaseAsync = () => {
         const {value} = this.selectNumber
-        // 更改状态
-        setTimeout(() => {
-            // 获取状态
-            store.dispatch(createIncrementAction(value*1))
-        }, 500)
+        this.props.incrementAsync(value * 1, 500)
     }
 
     render() {
         return (
             <div>
-                <h1>当前求和为:{store.getState()}</h1>
+                <h1>当前求和为:{this.props.count}</h1>
+                <h2>下方组件总人数为:{this.props.renshu}</h2>
                 <select ref={c => this.selectNumber = c}>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -64,4 +56,17 @@ class Count extends Component {
     }
 }
 
-export default Count;
+
+// 创建 并暴露一个Count的容器组件
+export default connect(
+    state => ({count: state.he,renshu:state.rens.length}),
+    {
+        increment: createIncrementAction,
+        decrement: createDecrementAction,
+        incrementAsync: createIncrementAsyncAction,
+    }
+)(Count)
+
+
+
+

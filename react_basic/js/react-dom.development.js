@@ -4323,7 +4323,7 @@ function findCurrentFiberUsingSlowPath(fiber) {
 
     !(a.alternate === b) ? invariant(false, 'Return fibers should always be each others\' alternates. This error is likely caused by a bug in React. Please file an issue.') : void 0;
   }
-  // If the root is not a host container, we're in a disconnected tree. I.e.
+  // If the root is not a host containers, we're in a disconnected tree. I.e.
   // unmounted.
   !(a.tag === HostRoot) ? invariant(false, 'Unable to find node on an unmounted component.') : void 0;
   if (a.stateNode.current === a) {
@@ -5190,7 +5190,7 @@ function getLeafNode(node) {
 }
 
 /**
- * Get the next sibling within a container. This will walk up the
+ * Get the next sibling within a containers. This will walk up the
  * DOM if a node's siblings have been exhausted.
  *
  * @param {DOMElement|DOMTextNode} node
@@ -6148,7 +6148,7 @@ var createMicrosoftUnsafeLocalFunction = function (func) {
   }
 };
 
-// SVG temp container for IE lacking innerHTML
+// SVG temp containers for IE lacking innerHTML
 var reusableSVGContainer = void 0;
 
 /**
@@ -7701,7 +7701,7 @@ function updateDOMProperties(domElement, updatePayload, wasCustomComponentTag, i
 function createElement(type, props, rootContainerElement, parentNamespace) {
   var isCustomComponentTag = void 0;
 
-  // We create tags in the namespace of their parent container, except HTML
+  // We create tags in the namespace of their parent containers, except HTML
   // tags get no namespace.
   var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement);
   var domElement = void 0;
@@ -8940,7 +8940,7 @@ function appendChildToContainer(container, child) {
     parentNode = container;
     parentNode.appendChild(child);
   }
-  // This container might be used for a portal.
+  // This containers might be used for a portal.
   // If something inside a portal is clicked, that click should bubble
   // through the React tree. However, on Mobile Safari the click would
   // never bubble through the *DOM* tree unless an ancestor with onclick
@@ -16846,7 +16846,7 @@ if (supportsMutation) {
       // If children might have changed, we have to add them all to the set.
       appendAllChildrenToContainer(newChildSet, workInProgress, false, false);
       portalOrRoot.pendingChildren = newChildSet;
-      // Schedule an update on the container to swap out the container.
+      // Schedule an update on the containers to swap out the containers.
       markUpdate(workInProgress);
       finalizeContainerChildren(container, newChildSet);
     }
@@ -20664,7 +20664,7 @@ function scheduleRootUpdate(current$$1, element, expirationTime, callback) {
 }
 
 function updateContainerAtExpirationTime(element, container, parentComponent, expirationTime, callback) {
-  // TODO: If this is a nested container, this won't be the root.
+  // TODO: If this is a nested containers, this won't be the root.
   var current$$1 = container.current;
 
   {
@@ -20865,7 +20865,7 @@ var didWarnAboutUnstableCreatePortal = false;
     if (container._reactRootContainer && container.nodeType !== COMMENT_NODE) {
       var hostInstance = findHostInstanceWithNoPortals(container._reactRootContainer._internalRoot.current);
       if (hostInstance) {
-        !(hostInstance.parentNode === container) ? warningWithoutStack$1(false, 'render(...): It looks like the React-rendered content of this ' + 'container was removed without using React. This is not ' + 'supported and will cause errors. Instead, call ' + 'ReactDOM.unmountComponentAtNode to empty a container.') : void 0;
+        !(hostInstance.parentNode === container) ? warningWithoutStack$1(false, 'render(...): It looks like the React-rendered content of this ' + 'containers was removed without using React. This is not ' + 'supported and will cause errors. Instead, call ' + 'ReactDOM.unmountComponentAtNode to empty a containers.') : void 0;
       }
     }
 
@@ -20875,7 +20875,7 @@ var didWarnAboutUnstableCreatePortal = false;
 
     !(!hasNonRootReactChild || isRootRenderedBySomeReact) ? warningWithoutStack$1(false, 'render(...): Replacing React-rendered children with a new root ' + 'component. If you intended to update the children of this node, ' + 'you should instead have the existing children update their state ' + 'and render the new pages instead of calling ReactDOM.render.') : void 0;
 
-    !(container.nodeType !== ELEMENT_NODE || !container.tagName || container.tagName.toUpperCase() !== 'BODY') ? warningWithoutStack$1(false, 'render(): Rendering pages directly into document.body is ' + 'discouraged, since its children are often manipulated by third-party ' + 'scripts and browser extensions. This may lead to subtle ' + 'reconciliation issues. Try rendering into a container element created ' + 'for your app.') : void 0;
+    !(container.nodeType !== ELEMENT_NODE || !container.tagName || container.tagName.toUpperCase() !== 'BODY') ? warningWithoutStack$1(false, 'render(): Rendering pages directly into document.body is ' + 'discouraged, since its children are often manipulated by third-party ' + 'scripts and browser extensions. This may lead to subtle ' + 'reconciliation issues. Try rendering into a containers element created ' + 'for your app.') : void 0;
   };
 
   warnOnInvalidCallback = function (callback, callerName) {
@@ -21200,7 +21200,7 @@ function legacyRenderSubtreeIntoContainer(parentComponent, children, container, 
 function createPortal$$1(children, container) {
   var key = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
-  !isValidContainer(container) ? invariant(false, 'Target container is not a DOM element.') : void 0;
+  !isValidContainer(container) ? invariant(false, 'Target containers is not a DOM element.') : void 0;
   // TODO: pass ReactDOM portal implementation as third argument
   return createPortal$1(children, container, null, key);
 }
@@ -21229,30 +21229,30 @@ var ReactDOM = {
     return findHostInstance(componentOrElement);
   },
   hydrate: function (element, container, callback) {
-    !isValidContainer(container) ? invariant(false, 'Target container is not a DOM element.') : void 0;
+    !isValidContainer(container) ? invariant(false, 'Target containers is not a DOM element.') : void 0;
     {
-      !!container._reactHasBeenPassedToCreateRootDEV ? warningWithoutStack$1(false, 'You are calling ReactDOM.hydrate() on a container that was previously ' + 'passed to ReactDOM.%s(). This is not supported. ' + 'Did you mean to call createRoot(container, {hydrate: true}).render(element)?', enableStableConcurrentModeAPIs ? 'createRoot' : 'unstable_createRoot') : void 0;
+      !!container._reactHasBeenPassedToCreateRootDEV ? warningWithoutStack$1(false, 'You are calling ReactDOM.hydrate() on a containers that was previously ' + 'passed to ReactDOM.%s(). This is not supported. ' + 'Did you mean to call createRoot(containers, {hydrate: true}).render(element)?', enableStableConcurrentModeAPIs ? 'createRoot' : 'unstable_createRoot') : void 0;
     }
     // TODO: throw or warn if we couldn't hydrate?
     return legacyRenderSubtreeIntoContainer(null, element, container, true, callback);
   },
   render: function (element, container, callback) {
-    !isValidContainer(container) ? invariant(false, 'Target container is not a DOM element.') : void 0;
+    !isValidContainer(container) ? invariant(false, 'Target containers is not a DOM element.') : void 0;
     {
-      !!container._reactHasBeenPassedToCreateRootDEV ? warningWithoutStack$1(false, 'You are calling ReactDOM.render() on a container that was previously ' + 'passed to ReactDOM.%s(). This is not supported. ' + 'Did you mean to call root.render(element)?', enableStableConcurrentModeAPIs ? 'createRoot' : 'unstable_createRoot') : void 0;
+      !!container._reactHasBeenPassedToCreateRootDEV ? warningWithoutStack$1(false, 'You are calling ReactDOM.render() on a containers that was previously ' + 'passed to ReactDOM.%s(). This is not supported. ' + 'Did you mean to call root.render(element)?', enableStableConcurrentModeAPIs ? 'createRoot' : 'unstable_createRoot') : void 0;
     }
     return legacyRenderSubtreeIntoContainer(null, element, container, false, callback);
   },
   unstable_renderSubtreeIntoContainer: function (parentComponent, element, containerNode, callback) {
-    !isValidContainer(containerNode) ? invariant(false, 'Target container is not a DOM element.') : void 0;
+    !isValidContainer(containerNode) ? invariant(false, 'Target containers is not a DOM element.') : void 0;
     !(parentComponent != null && has(parentComponent)) ? invariant(false, 'parentComponent must be a valid React Component') : void 0;
     return legacyRenderSubtreeIntoContainer(parentComponent, element, containerNode, false, callback);
   },
   unmountComponentAtNode: function (container) {
-    !isValidContainer(container) ? invariant(false, 'unmountComponentAtNode(...): Target container is not a DOM element.') : void 0;
+    !isValidContainer(container) ? invariant(false, 'unmountComponentAtNode(...): Target containers is not a DOM element.') : void 0;
 
     {
-      !!container._reactHasBeenPassedToCreateRootDEV ? warningWithoutStack$1(false, 'You are calling ReactDOM.unmountComponentAtNode() on a container that was previously ' + 'passed to ReactDOM.%s(). This is not supported. Did you mean to call root.unmount()?', enableStableConcurrentModeAPIs ? 'createRoot' : 'unstable_createRoot') : void 0;
+      !!container._reactHasBeenPassedToCreateRootDEV ? warningWithoutStack$1(false, 'You are calling ReactDOM.unmountComponentAtNode() on a containers that was previously ' + 'passed to ReactDOM.%s(). This is not supported. Did you mean to call root.unmount()?', enableStableConcurrentModeAPIs ? 'createRoot' : 'unstable_createRoot') : void 0;
     }
 
     if (container._reactRootContainer) {
@@ -21276,10 +21276,10 @@ var ReactDOM = {
         var _rootEl = getReactRootElementInContainer(container);
         var hasNonRootReactChild = !!(_rootEl && getInstanceFromNode$1(_rootEl));
 
-        // Check if the container itself is a React root node.
+        // Check if the containers itself is a React root node.
         var isContainerReactRoot = container.nodeType === ELEMENT_NODE && isValidContainer(container.parentNode) && !!container.parentNode._reactRootContainer;
 
-        !!hasNonRootReactChild ? warningWithoutStack$1(false, "unmountComponentAtNode(): The node you're attempting to unmount " + 'was rendered by React and is not a top-level container. %s', isContainerReactRoot ? 'You may have accidentally passed in a React root node instead ' + 'of its container.' : 'Instead, have the parent component update its state and ' + 'rerender in order to remove this component.') : void 0;
+        !!hasNonRootReactChild ? warningWithoutStack$1(false, "unmountComponentAtNode(): The node you're attempting to unmount " + 'was rendered by React and is not a top-level containers. %s', isContainerReactRoot ? 'You may have accidentally passed in a React root node instead ' + 'of its containers.' : 'Instead, have the parent component update its state and ' + 'rerender in order to remove this component.') : void 0;
       }
 
       return false;
@@ -21316,9 +21316,9 @@ var ReactDOM = {
 
 function createRoot(container, options) {
   var functionName = enableStableConcurrentModeAPIs ? 'createRoot' : 'unstable_createRoot';
-  !isValidContainer(container) ? invariant(false, '%s(...): Target container is not a DOM element.', functionName) : void 0;
+  !isValidContainer(container) ? invariant(false, '%s(...): Target containers is not a DOM element.', functionName) : void 0;
   {
-    !!container._reactRootContainer ? warningWithoutStack$1(false, 'You are calling ReactDOM.%s() on a container that was previously ' + 'passed to ReactDOM.render(). This is not supported.', enableStableConcurrentModeAPIs ? 'createRoot' : 'unstable_createRoot') : void 0;
+    !!container._reactRootContainer ? warningWithoutStack$1(false, 'You are calling ReactDOM.%s() on a containers that was previously ' + 'passed to ReactDOM.render(). This is not supported.', enableStableConcurrentModeAPIs ? 'createRoot' : 'unstable_createRoot') : void 0;
     container._reactHasBeenPassedToCreateRootDEV = true;
   }
   var hydrate = options != null && options.hydrate === true;

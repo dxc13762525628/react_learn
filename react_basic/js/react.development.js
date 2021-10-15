@@ -2167,7 +2167,7 @@ function releaseTraverseContext(traverseContext) {
 }
 
 /**
- * @param {?*} children Children tree container.
+ * @param {?*} children Children tree containers.
  * @param {!string} nameSoFar Name of the key path so far.
  * @param {!function} callback Callback to invoke with each child found.
  * @param {?*} traverseContext Used to pass information throughout the traversal
@@ -2309,7 +2309,7 @@ function forEachSingleChild(bookKeeping, child, name) {
  * The provided forEachFunc(child, index) will be called for each
  * leaf child.
  *
- * @param {?*} children Children tree container.
+ * @param {?*} children Children tree containers.
  * @param {function(*, int)} forEachFunc
  * @param {*} forEachContext Context for forEachContext.
  */
@@ -2363,7 +2363,7 @@ function mapIntoWithKeyPrefixInternal(children, array, prefix, func, context) {
  * The provided mapFunction(child, key, index) will be called for each
  * leaf child.
  *
- * @param {?*} children Children tree container.
+ * @param {?*} children Children tree containers.
  * @param {function(*, int)} func The map function.
  * @param {*} context Context for mapFunction.
  * @return {object} Object containing the ordered map of results.
@@ -2383,7 +2383,7 @@ function mapChildren(children, func, context) {
  *
  * See https://reactjs.org/docs/react-api.html#reactchildrencount
  *
- * @param {?*} children Children tree container.
+ * @param {?*} children Children tree containers.
  * @return {number} The number of children.
  */
 function countChildren(children) {

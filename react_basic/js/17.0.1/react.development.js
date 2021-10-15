@@ -1076,7 +1076,7 @@
    * The provided mapFunction(child, index) will be called for each
    * leaf child.
    *
-   * @param {?*} children Children tree container.
+   * @param {?*} children Children tree containers.
    * @param {function(*, int)} func The map function.
    * @param {*} context Context for mapFunction.
    * @return {object} Object containing the ordered map of results.
@@ -1099,7 +1099,7 @@
    *
    * See https://reactjs.org/docs/react-api.html#reactchildrencount
    *
-   * @param {?*} children Children tree container.
+   * @param {?*} children Children tree containers.
    * @return {number} The number of children.
    */
 
@@ -1120,7 +1120,7 @@
    * The provided forEachFunc(child, index) will be called for each
    * leaf child.
    *
-   * @param {?*} children Children tree container.
+   * @param {?*} children Children tree containers.
    * @param {function(*, int)} forEachFunc
    * @param {*} forEachContext Context for forEachContext.
    */
